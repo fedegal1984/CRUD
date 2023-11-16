@@ -2,56 +2,82 @@ import React, { useState } from 'react'
 import "./RegisterForm.css"
 
 const RegisterForm = () => {
-    const [userData, setUserData] = useState ({})
-    const [formUserData, setFormUserData] = useState({
-        alias:"",
-        email:"", 
-        password:""
+  const [formData, setFormData] = useState({
+    alias: "",
+    email: "",
+    password: ""
+  });
+
+  const handleInputChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Realiza la solicitud Fetch
+    fetch('http://localhost:3040/user/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
     })
-    const [showPersonalData, setShowPersonalData] = useState(false)
-    const handleRegisterUser = (evento) =>{
-        evento.preventDefault()
-        console.log(evento)
-        setShowPersonalData(true)
-        setUserData(formUserData)
-        setFormUserData({
-        alias:"",
-        email:"",
-        password:""
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Error en la solicitud');
+      }
+      return response.json();
     })
-        
-    }
-    const handleChangeRegisterUser = (evento) =>{
-        console.log(evento.target.name)
-        console.log(formUserData)
-        setFormUserData({...formUserData, [evento.target.name]: evento.target.value})
-        
-    }
+    .then(data => {
+      // Maneja la respuesta exitosa
+      console.log('Registro exitoso:', data);
+    })
+    .catch(error => {
+      // Maneja errores en la solicitud
+      console.error('Error en la solicitud:', error);
+    });
+  };
+
   return (
-    <div>
-        <form onSubmit={handleRegisterUser} className='formularioUsuario'>
-            <h2>Register</h2>
-            <label htmlFor="alias">Username:*</label>
-            <input type="text" placeholder='Username' name="alias" id='alias' onChange={handleChangeRegisterUser} value={formUserData.alias} required/>
+    <form onSubmit={handleSubmit}>
+      {/* Campos del formulario */}
+      <label htmlFor="alias">Alias:</label>
+      <input
+        type="text"
+        id="alias"
+        name="alias"
+        value={formData.alias}
+        onChange={handleInputChange}
+        required
+      />
 
-            <label htmlFor="email">Email:*</label>
-            <input type="email" placeholder="xxxx@xxxx.com" name="email" id='email' onChange={handleChangeRegisterUser} value={formUserData.email} required/>
+      <label htmlFor="email">Email:</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        value={formData.email}
+        onChange={handleInputChange}
+        required
+      />
+      <label htmlFor="password">Password:</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        value={formData.password}
+        onChange={handleInputChange}
+        required
+      />
 
-            <label htmlFor="password">Asunto:*</label>
-            <input type="password" placeholder='Password' name="password" id='password' onChange={handleChangeRegisterUser} value={formUserData.password} required/>
 
-            <button type='submit'>Register</button>
-        </form>
-        {  
-            showPersonalData &&
-            <div className='personalData'>
-                <h4>Nombre de usuario: {userData.nombre}</h4>
-                <h4>Email: {userData.email}</h4>
-                <div><span><b>Mensaje enviado <i className="bi bi-check-all"></i></b></span></div>
-            </div>
-        }
-    </div>
-  )
-}
+      <button type="submit">Registrarse</button>
+    </form>
+  );
+};
 
 export default RegisterForm

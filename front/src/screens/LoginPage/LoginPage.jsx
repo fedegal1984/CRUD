@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react';
 import "./LoginPage.css"
+import { LoginForm } from '../../components/index'
 
-const LoginPage = () => {
+const LoginPage = ({handleLogin}) => {
+
   return (
-    <div>LoginPage</div>
-  )
+    <>
+      <LoginForm handleLogin={handleLogin} />
+    </>
+  );
 }
 
-export default LoginPage
+export default LoginPage;

@@ -7,7 +7,7 @@ const createUser = async (req, res) =>{
     const emailExistente = await User.findOne({email})
 
     if(emailExistente){
-        return res.status(404).json({ok: false, error: "el email ya está registrado"})
+        return res.status(409).json({ok: false, error: "EmailAlreadyExists"})
     }else{
         const hashedPassword = await bcrypt.hash(password, 10)
         const newUser = new User({email, password: hashedPassword, alias})
@@ -25,10 +25,10 @@ const login = async (req, res) =>{
         const userFound = await User.findOne({email})
         if(!userFound) return res.status(400).json({message: "email no válido"})
         const compararPassword = await bcrypt.compare(password, userFound.password)
-        if(!compararPassword) return res.status(400).json({message: "contraseña inválida"})
+        if(!compararPassword) return res.status(401).json({message: "contraseña incorrecta"})
         const token = await createAccessToken({id: userFound._id })
         res.cookie("token", token)
-        res.json({id: userFound._id, email: userFound.email, alias: userFound.alias})
+        res.json({id: userFound._id, email: userFound.email, alias: userFound.alias, token})
     }
     catch(error){
         res.status(500).json({message: error.message})

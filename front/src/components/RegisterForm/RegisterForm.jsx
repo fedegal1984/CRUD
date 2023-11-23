@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import "./RegisterForm.css"
+import { Link } from 'react-router-dom';
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
@@ -8,43 +9,56 @@ const RegisterForm = () => {
     password: ""
   });
 
+  const [error, setError] = useState('');
+
   const handleInputChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // Realiza la solicitud Fetch
-    fetch('http://localhost:3040/user/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
     })
-    .then(response => {
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setError('')
+  
+    if (!formData.email || !formData.alias) {
+      setError('Por favor, complete todos los campos obligatorios.')
+      return
+    }
+  
+    try {
+      const response = await fetch('http://localhost:3040/user/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+    
       if (!response.ok) {
-        throw new Error('Error en la solicitud');
+        const data = await response.json()
+        
+        if (response.status === 409 && data.error === 'EmailAlreadyExists') {
+          setError('El correo electrónico ya está registrado.')
+        } else {
+          setError('Error en la solicitud');
+        }
+        return
       }
-      return response.json();
-    })
-    .then(data => {
-      // Maneja la respuesta exitosa
-      console.log('Registro exitoso:', data);
-    })
-    .catch(error => {
-      // Maneja errores en la solicitud
-      console.error('Error en la solicitud:', error);
-    });
-  };
+    
+      const data = await response.json()
+      console.log('Registro exitoso - ID:', data.id, 'Email:', data.email, 'Alias:', data.alias)
+    
+    } catch (error) {
+      console.error('Error en la solicitud:', error)
+      setError('Error en la solicitud')
+    }}
 
   return (
-    <form onSubmit={handleSubmit}>
-      {/* Campos del formulario */}
+  <div className='contenedorFormulario'>
+    
+    <form onSubmit={handleSubmit} noValidate>
       <label htmlFor="alias">Alias:</label>
       <input
         type="text"
@@ -73,11 +87,14 @@ const RegisterForm = () => {
         onChange={handleInputChange}
         required
       />
-
+      {error && <p style={{ color: 'red' }}>{error}</p>}
 
       <button type="submit">Registrarse</button>
-    </form>
-  );
-};
+    </form>  
+    <p>Have an account already? <Link to="/login">Login</Link></p>
+    </div>
+  )
+
+}
 
 export default RegisterForm

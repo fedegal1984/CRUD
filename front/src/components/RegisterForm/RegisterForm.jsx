@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import "./RegisterForm.css"
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
@@ -10,6 +10,7 @@ const RegisterForm = () => {
   });
 
   const [error, setError] = useState('')
+  const navigate = useNavigate()
 
   const handleInputChange = (e) => {
     setFormData({
@@ -49,17 +50,18 @@ const RegisterForm = () => {
     
       const data = await response.json()
       /* console.log('Registro exitoso - ID:', data.id, 'Email:', data.email, 'Alias:', data.alias) */
-    
+      navigate("/login")
     } catch (error) {
       console.error('Error en la solicitud:', error)
       setError('Error en la solicitud')
     }}
 
   return (
-  <div className='contenedorFormulario'>
-    
+  <div className='contenedorFormularioRegister'>
+    <h1>Registrarse</h1>
+    <hr />
     <form onSubmit={handleSubmit} noValidate>
-      <label htmlFor="alias">Alias:</label>
+      <label htmlFor="alias">Nickname:</label>
       <input
         type="text"
         id="alias"
@@ -67,6 +69,7 @@ const RegisterForm = () => {
         value={formData.alias}
         onChange={handleInputChange}
         required
+        placeholder='Nombre que desea utilizar'
       />
 
       <label htmlFor="email">Email:</label>
@@ -77,6 +80,7 @@ const RegisterForm = () => {
         value={formData.email}
         onChange={handleInputChange}
         required
+        placeholder='nombre@gmail.com'
       />
       <label htmlFor="password">Password:</label>
       <input
@@ -87,11 +91,12 @@ const RegisterForm = () => {
         onChange={handleInputChange}
         required
       />
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-
+      {error && <p className='errorp'>{error}</p>}
+      <div className="centrarBtn">
       <button type="submit">Registrarse</button>
+      </div>
     </form>  
-    <p>Have an account already? <Link to="/login">Login</Link></p>
+    <p>¿Ya tienes una cuenta? <Link to="/login" className='nav-link'>Ingresa</Link></p>
     </div>
   )
 

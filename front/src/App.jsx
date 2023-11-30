@@ -7,7 +7,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [token, setToken] = useState(null)
 
-  const handleLogin = (token) => {
+  const handleLogin = (token, alias) => {
     setIsLoggedIn(true)
     setToken(token)
   }

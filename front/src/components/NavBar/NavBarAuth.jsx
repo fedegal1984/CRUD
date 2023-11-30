@@ -1,26 +1,17 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import "./NavBar.css"
 
 const NavBarAuth = ({ handleLogout }) => {
   return (
     <ul className='nav-ul'>
       <li>
-        <Link to="/addPost" style={{ textDecoration: 'none' }}>
-          New Post
+        <Link to="/profile" style={{ textDecoration: 'none', fontWeight: 200, fontSize: 30 }} className='navbar-link'>
+        <i class="bi bi-person-lines-fill"></i>
         </Link>
       </li>
       <li>
-        <Link to="/posts" style={{ textDecoration: 'none' }}>
-          Show All
-        </Link>
-      </li>
-      <li>
-        <Link to="/profile" style={{ textDecoration: 'none' }}>
-          Profile
-        </Link>
-      </li>
-      <li>
-        <button onClick={handleLogout}>Logout</button>
+        <button className="logout-btn"onClick={handleLogout}><i class="bi bi-box-arrow-left"></i></button>
       </li>
     </ul>
   )

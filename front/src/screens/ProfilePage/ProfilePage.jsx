@@ -19,6 +19,7 @@ const ProfilePage = ({ token }) => {
         if (response.ok) {
           const data = await response.json()
           setUserData(data)
+          
         } else {
           console.error('Error al obtener datos del perfil')
         }

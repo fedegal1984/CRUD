@@ -55,19 +55,27 @@ const PostsPage = ({ token }) => {
   }
 
   return (
-    <div>
-      <h1>Tus Posteos</h1>
+    <div className='post-principal'>
+      <hr />
+      <h1>Estos son tus posteos hasta ahora:</h1>
+      <hr />
       <ul>
+        <div className='post-container'>
         {userPosts.map((post) => (
+          <div className='post-each'>
           <li key={post._id}>
             <h3>{post.title}</h3>
             <p>{post.description}</p>
-            <button onClick={() => deletePost(post._id)}>Eliminar</button>
-            <Link to={`/posts/${post._id}`}>Editar</Link>
+            <div className='eliminar-delete'>
+            <button onClick={() => deletePost(post._id)}><i class="bi bi-trash3"></i></button>
+            <Link to={`/posts/${post._id}`} className='editar-link'><i class="bi bi-pencil-square"></i></Link>
+            </div>
           </li>
-        ))}
+          </div>
+        ))}</div>
       </ul>
-      <Link to="/addPost">Crear un nuevo posteo</Link>
+      
+      <Link to="/addPost" className='create-link'>Crear</Link>
     </div>
   )
 }

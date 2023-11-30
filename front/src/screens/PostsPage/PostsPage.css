@@ -1,7 +1,78 @@
-h3{
-    font-size: 1.5rem;
-    color: red;
+.post-principal h1{
+    color: var(--color-titulos-principales);
+    padding-left: 30px;
+    font-size: 1.8rem;
+    font-weight: 600;
+    font-style: italic;
 }
-p{
-    color: blue;
+.post-principal hr{
+    border-color: #93b1a634;
+    border-width: 2px;
+    
+}
+
+.post-container{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.post-each{
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    margin: 15px;
+    list-style: none;
+    width: 400px;
+    background-color: #5c8374bb;
+
+}
+.post-each p{
+    font-size: 0.8rem;
+    padding: 10px;
+    font-style: italic;
+}
+
+.post-each h3{
+    font-size: 0.9rem;
+    color: var(--color-titulos-principales);
+    background-color: #040d126e;
+    backdrop-filter: blur(0.2rem);
+    font-weight: 200;
+    font-weight: bold;
+    padding: 10px;
+}
+.eliminar-delete{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 10px;
+    margin-right: 20px;
+    
+}
+.eliminar-delete button{
+    width: 30px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+.eliminar-delete .editar-link{
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    color: #758f85;
+    transition: color 0.3s;
+}
+
+.eliminar-delete button:hover{
+    color: #aebeb8;
+}
+.eliminar-delete .editar-link:hover{
+    color: #aebeb8;
+}
+
+.create-link{
+    font-size: 40px;
+    text-decoration: none;
+    color:var(--color-titulos-principales) ;
 }

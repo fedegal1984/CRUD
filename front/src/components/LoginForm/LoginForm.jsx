@@ -11,6 +11,7 @@ const LoginForm = ({handleLogin}) => {
   const [error, setError] = useState('')
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [token, setToken] = useState(null)
+  const [alias, setAlias] = useState(null)
 
   const navigate = useNavigate()
 
@@ -57,6 +58,7 @@ const LoginForm = ({handleLogin}) => {
       handleLogin(data.token)
       setIsLoggedIn(true)
       setToken(data.token)
+      setAlias(data.alias)
       navigate('/posts', { replace: true })
       
     } catch (error) {
@@ -72,6 +74,7 @@ const LoginForm = ({handleLogin}) => {
       ) : (
         <>
           <h1>Login</h1>
+          <hr/>
           <form onSubmit={handleSubmit} noValidate>
             <label htmlFor="email">Email:</label>
             <input
@@ -80,6 +83,7 @@ const LoginForm = ({handleLogin}) => {
               name="email"
               value={formData.email}
               onChange={handleInputChange}
+              placeholder="nombre@gmail.com"
               required
             />
             <label htmlFor="password">Password:</label>
@@ -91,12 +95,13 @@ const LoginForm = ({handleLogin}) => {
               onChange={handleInputChange}
               required
             />
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-
-            <button type="submit">Login</button>
+            {error && <p className="errorp">{error}</p>}
+            <div className="centrarBtn">
+            <button type="submit">Ingresar</button>
+            </div>
           </form>
 
-          <p>Don't have an account yet? <Link to="/register">Sign up</Link></p>
+          <p>¿No tienes cuenta aún? <Link to="/register" className="nav-link">Registrate</Link></p>
         </>
       )}
     </div>

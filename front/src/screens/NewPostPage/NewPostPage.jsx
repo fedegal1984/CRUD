@@ -1,8 +1,9 @@
 import React from 'react'
+import { PostForm } from '../../components'
 
-const NewPostPage = () => {
+const NewPostPage = ({token}) => {
   return (
-    <div>NewPostPage</div>
+    <><PostForm token={token}/></>
   )
 }
 

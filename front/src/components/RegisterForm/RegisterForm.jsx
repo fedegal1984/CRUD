@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import "./RegisterForm.css"
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
@@ -9,7 +9,7 @@ const RegisterForm = () => {
     password: ""
   });
 
-  const [error, setError] = useState('');
+  const [error, setError] = useState('')
 
   const handleInputChange = (e) => {
     setFormData({
@@ -42,13 +42,13 @@ const RegisterForm = () => {
         if (response.status === 409 && data.error === 'EmailAlreadyExists') {
           setError('El correo electrónico ya está registrado.')
         } else {
-          setError('Error en la solicitud');
+          setError('Error en la solicitud')
         }
         return
       }
     
       const data = await response.json()
-      console.log('Registro exitoso - ID:', data.id, 'Email:', data.email, 'Alias:', data.alias)
+      /* console.log('Registro exitoso - ID:', data.id, 'Email:', data.email, 'Alias:', data.alias) */
     
     } catch (error) {
       console.error('Error en la solicitud:', error)

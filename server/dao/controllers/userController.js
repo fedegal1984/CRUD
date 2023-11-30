@@ -13,7 +13,7 @@ const createUser = async (req, res) =>{
         const newUser = new User({email, password: hashedPassword, alias})
         await newUser.save()
         const token = await createAccessToken({id: newUser._id})
-        res.cookie("token", token)
+        res.cookie("token", token, { expires: new Date(Date.now() + 86400000), httpOnly: true, sameSite: 'None', secure: true })
         res.json({id: newUser._id, email: newUser.email, alias: newUser.alias})
     }
 }
@@ -27,7 +27,7 @@ const login = async (req, res) =>{
         const compararPassword = await bcrypt.compare(password, userFound.password)
         if(!compararPassword) return res.status(401).json({message: "contraseña incorrecta"})
         const token = await createAccessToken({id: userFound._id })
-        res.cookie("token", token)
+        res.cookie("token", token, { expires: new Date(Date.now() + 86400000), httpOnly: true, sameSite: 'None', secure: true })
         res.json({id: userFound._id, email: userFound.email, alias: userFound.alias, token})
     }
     catch(error){

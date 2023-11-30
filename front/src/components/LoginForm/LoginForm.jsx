@@ -1,38 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import "./LoginForm.css";
+import React, { useState, useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import "./LoginForm.css"
 
 const LoginForm = ({handleLogin}) => {
   const [formData, setFormData] = useState({
     email: "",
     password: ""
-  });
+  })
 
-  const [error, setError] = useState('');
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [error, setError] = useState('')
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [token, setToken] = useState(null)
 
-  const navigate = useNavigate();
-  /* useEffect(() => {
-    if (isLoggedIn) {
-      navigate('/posts', { replace: true });
-  }
-  }, [isLoggedIn, navigate]); */
+  const navigate = useNavigate()
 
   const handleInputChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
-    });
-  };
+    })
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError('');
+    e.preventDefault()
+    setError('')
 
     if (!formData.email || !formData.password) {
-      setError('Por favor, complete todos los campos obligatorios.');
-      return;
+      setError('Por favor, complete todos los campos obligatorios.')
+      return
     }
 
     try {
@@ -42,34 +37,33 @@ const LoginForm = ({handleLogin}) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
-      });
+        credentials: 'include',
+      })
 
       if (!response.ok) {
-        const data = await response.json();
+        const data = await response.json()
 
         if (response.status === 400 && data.message === 'email no válido') {
-          setError('El email ingresado no está registrado.');
+          setError('El email ingresado no está registrado.')
         } else if (response.status === 401 && data.message === 'contraseña incorrecta') {
-          setError('La contraseña ingresada no es correcta.');
+          setError('La contraseña ingresada no es correcta.')
         } else {
-          setError('Error en la solicitud');
+          setError('Error en la solicitud')
         }
-        return;
+        return
       }
 
       const data = await response.json()
-      console.log('Respuesta del servidor:', data)
-      console.log('Ingreso exitoso - ID:', data.id, 'Email:', data.email, 'Alias:', data.alias);
-      
       handleLogin(data.token)
       setIsLoggedIn(true)
       setToken(data.token)
       navigate('/posts', { replace: true })
+      
     } catch (error) {
-      console.error('Error en la solicitud:', error);
-      setError('Error en la solicitud');
+      console.error('Error en la solicitud:', error)
+      setError('Error en la solicitud')
     }
-  };
+  }
 
   return (
     <div className='contenedorFormulario'>
@@ -106,7 +100,7 @@ const LoginForm = ({handleLogin}) => {
         </>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default LoginForm;
+export default LoginForm

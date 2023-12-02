@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import "./ProfilePage.css"
+import { Link } from 'react-router-dom'
 
 const ProfilePage = ({ token }) => {
   const [userData, setUserData] = useState(null)
@@ -42,11 +44,16 @@ const ProfilePage = ({ token }) => {
   }
 
   return (
-    <div>
+    <>
+    <div className='profile'>
       <h1>Perfil de Usuario</h1>
       <p>Alias: {userData.alias}</p>
       <p>Email: {userData.email}</p>
     </div>
+    <div>
+      <Link to="/posts" className='posts-link'>Volver a mis notas</Link>
+    </div>
+    </>
   )
 }
 

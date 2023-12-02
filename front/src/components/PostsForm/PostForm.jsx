@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import "./PostForm.css"
 
 const PostForm = ({token}) => {
   const [title, setTitle] = useState('')
@@ -31,6 +32,7 @@ const PostForm = ({token}) => {
 
   return (
     <>
+    <div className='container-form'>
     <form onSubmit={handleSubmit}>
       <label htmlFor="title">Título:</label>
       <input
@@ -51,7 +53,8 @@ const PostForm = ({token}) => {
 
       <button type="submit">Crear Post</button>
     </form>
-    <Link to="/posts">Ir a mis posteos</Link>
+    </div>
+    <Link to="/posts" className='posts-link'>Ver todas mis notas</Link>
     </>
   )
 }

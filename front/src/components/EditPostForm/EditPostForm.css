@@ -1,5 +1,5 @@
 .container-form{
-    width: 600px;
+    width: 400px;
     border: solid 1px #93b1a634;
     border-radius: 5px;
     padding: 15px;
@@ -24,18 +24,4 @@
     width: 100%;
     color: var(--color-titulos-principales);
     font-size: 0.8rem;
-    padding: 10px;
-}
-.posts-link{
-    text-decoration: none;
-    color: var(--color-titulos-superiores);
-    display: flex;
-    justify-content: end;
-    margin-right: 20px;
-    transition: color 0.3s;
-    font-size: 1.4rem;
-}
-
-.posts-link:hover{
-    color: var(--color-titulos-principales);
 }

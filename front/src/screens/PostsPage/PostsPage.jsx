@@ -62,20 +62,20 @@ const PostsPage = ({ token }) => {
       <ul>
         <div className='post-container'>
         {userPosts.map((post) => (
-          <div className='post-each'>
-          <li key={post._id}>
+          <div key={post._id} className='post-each'>
+          <li>
             <h3>{post.title}</h3>
             <p>{post.description}</p>
             <div className='eliminar-delete'>
-            <button onClick={() => deletePost(post._id)}><i class="bi bi-trash3"></i></button>
-            <Link to={`/posts/${post._id}`} className='editar-link'><i class="bi bi-pencil-square"></i></Link>
+            <button onClick={() => deletePost(post._id)}><i className="bi bi-trash3"></i></button>
+            <Link to={`/posts/${post._id}`} className='editar-link'><i className="bi bi-pencil-square"></i></Link>
             </div>
           </li>
           </div>
         ))}</div>
       </ul>
       
-      <Link to="/addPost" className='create-link'>Crear</Link>
+      <Link to="/addPost" className='create-link'>Agregar Nota</Link>
     </div>
   )
 }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import {useNavigate, useParams} from 'react-router-dom'
+import "./EditPostForm.css"
 
 const EditPostForm = ({ token }) => {
   const { id } = useParams()
@@ -72,7 +73,7 @@ const EditPostForm = ({ token }) => {
 
   return (
     <div>
-      <h1>Editar Posteo</h1>
+      <div className='container-form'>
       <form>
         <label htmlFor="title">Título:</label>
         <input
@@ -95,6 +96,7 @@ const EditPostForm = ({ token }) => {
           Actualizar
         </button>
       </form>
+      </div>
     </div>
   )
 }

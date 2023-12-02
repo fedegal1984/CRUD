@@ -11,7 +11,7 @@ const NavBarNoAuth = () => {
       </li>
       <li>
         <Link to="/register" style={{ textDecoration: 'none', fontWeight: 200, fontSize: 30 }} className='navbar-link'>
-          Register
+          Registro
         </Link>
       </li>
     </ul>

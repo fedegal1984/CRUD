@@ -7,11 +7,11 @@ const NavBarAuth = ({ handleLogout }) => {
     <ul className='nav-ul'>
       <li>
         <Link to="/profile" style={{ textDecoration: 'none', fontWeight: 200, fontSize: 30 }} className='navbar-link'>
-        <i class="bi bi-person-lines-fill"></i>
+        <i className="bi bi-person-lines-fill"></i>
         </Link>
       </li>
       <li>
-        <button className="logout-btn"onClick={handleLogout}><i class="bi bi-box-arrow-left"></i></button>
+        <button className="logout-btn"onClick={handleLogout}><i className="bi bi-box-arrow-left"></i></button>
       </li>
     </ul>
   )

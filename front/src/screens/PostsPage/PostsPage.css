@@ -1,3 +1,4 @@
+
 .post-principal h1{
     color: var(--color-titulos-principales);
     padding-left: 30px;
@@ -75,4 +76,14 @@
     font-size: 40px;
     text-decoration: none;
     color:var(--color-titulos-principales) ;
+    font-weight: 500;
+    border:#5c8374bb 2px solid;
+    display: flex;
+    justify-content: center;
+    margin: 30px;
+    transition: color 0.3s;
+}
+.create-link:hover{
+    background-color: #93b1a634;
+    color: rgba(136, 148, 153, 0.651);
 }

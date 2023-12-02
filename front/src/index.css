@@ -16,6 +16,6 @@
   font-size: 1.2rem;
 }
 body {
-  background-image: url(../sun-tornado.svg);
+  background-image: url(./sun-tornado.svg);
   background-size: cover;
 }

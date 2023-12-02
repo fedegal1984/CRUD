@@ -11,6 +11,7 @@
     color: var(--color-titulos-principales);
     font-size: 2rem;
     transition: color 0.3s;
+    margin-right: 20px;
 }
 .navbar-link:hover{
     color: #d7dfdc;;

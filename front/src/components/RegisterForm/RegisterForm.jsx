@@ -23,7 +23,7 @@ const RegisterForm = () => {
     e.preventDefault()
     setError('')
   
-    if (!formData.email || !formData.alias) {
+    if (!formData.email || !formData.alias || !formData.password) {
       setError('Por favor, complete todos los campos obligatorios.')
       return
     }
